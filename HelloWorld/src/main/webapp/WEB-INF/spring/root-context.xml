@@ -41,6 +41,7 @@
 	</bean>
 		
 		
+	<!-- TimeMapper 인터페이스를 등록해준다. -->
 	<mybatis-spring:scan base-package="org.zerock.mapper" />
 		
 </beans>

@@ -6,8 +6,9 @@
  <!-- namespace는 자바의 패키지와 비슷한 역할이다. 파일명을 포함해서 위치를 지정해주어야한다. -->
 <mapper namespace="org.zerock.mapper.TimeMapper">
 
-<!-- SQL문을 작성시 세미콜론(;)을 붙이지 않는다. -->
+<!-- id는 TimeMapper에 있는 메서드의 이름과 같아야한다. -->
   <select id="getTime2" resultType="String">
+<!-- SQL문을 작성시 세미콜론(;)을 붙이지 않는다. -->
     select sysdate from dual
   </select>
 </mapper>

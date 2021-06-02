@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="org.zerock.config">
+	<logger name="org.zerock.controller">
 		<level value="info" />
 	</logger>
 	
@@ -30,6 +30,14 @@
 
 	<logger name="org.springframework.web">
 		<level value="info" />
+	</logger>
+
+	<logger name="jdbc.audit">
+		<level value="warn" />
+	</logger>
+	
+	<logger name="jdbc.connection">
+		<level value="warn" />
 	</logger>
 
 	<!-- Root Logger -->
