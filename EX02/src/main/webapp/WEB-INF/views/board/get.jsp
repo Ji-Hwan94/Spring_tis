@@ -81,6 +81,22 @@
 										});
 									});
 								</script>
+								
+								<!-- reply ----------------------------------------------------------->
+								<script type="text/javascript" src="/resources/js/reply.js"></script>
+								<script>
+									var bnoValue = '<c:out value="${board.bno}" />';
+									
+									replyService.getList({bno:bnoValue, page:1}, 
+										// server에서 날라온 data를 list에 넣는다.
+										function(list){
+											// list의 길이가 있는 경우 len에 값을 넣는다. 없는 경우 0을 len에 넣는다.
+											for(var i=0, len = list.length||0; i<len; i++){
+												console.log(list[i]);
+											}
+									});							
+								</script>
+								<!-- ./reply -->
                             
                         </div>
                         <!-- /.panel-body -->

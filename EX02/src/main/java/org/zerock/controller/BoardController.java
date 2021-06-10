@@ -21,17 +21,18 @@ import org.zerock.service.BoardService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
-@RestController
+
+//@RestController
 @Controller
-@AllArgsConstructor
-@RequestMapping("/board/*")
 @Log4j
+@RequestMapping("/board/*")
+@AllArgsConstructor
 public class BoardController {
 	private BoardService service; //자동주입
 	
-	// 목록
-//	@GetMapping("/list")
-//	public void list(Model model) {
+//	 목록
+//	 @GetMapping("/list")
+//	 public void list(Model model) {
 //		log.info("list");
 //		model.addAttribute("list",service.getList());
 //	}
@@ -92,13 +93,4 @@ public class BoardController {
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 		
 	}
-	
-//	@GetMapping(value="/getAjax?bno=1", 
-//			produces = {MediaType.APPLICATION_JSON_UTF8_VALUE, 
-//					MediaType.APPLICATION_XML_VALUE})
-//	public List<BoardVO> getBoard() {
-		
-		
-		
-//	}
 }

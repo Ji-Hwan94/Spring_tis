@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.ReplyMapper">
+	<select id="getListWithPaging" resultType="org.zerock.domain.ReplyVO">
+		select rno, bno, reply, replyer, replyDate, updateDate
+		from tbl_reply
+		where bno = #{bno}
+		order by rno asc
+	</select>
+</mapper>
