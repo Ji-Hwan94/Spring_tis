@@ -21,6 +21,11 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">  
                         	<form role="form" action="/board/modify" method="post"> 
+                        		<input type='hidden' name='pageNum' value='<c:out value="${cri.pageNum}" />'>
+								<input type='hidden' name='amount' value='<c:out value="${cri.amount}" />'>
+								<input type='hidden' name='type' value='<c:out value="${cri.type}" />'>
+								<input type='hidden' name='keyword' value='<c:out value="${cri.keyword}" />'>
+								                        	
                         		<div class="form-group">
                         			<label>Bno</label>
                         			<input class="form-control" name="bno" value='<c:out value="${board.bno}"/>' readonly>
@@ -57,14 +62,32 @@
                            		<script>
                            			$(document).ready(function(){
                            				var formObj=$("form");
+                           				
                            				$("button").on("click",function(e){
                            					e.preventDefault(); //전송방지
+                           					
                            					var operation=$(this).data("oper");
+                           					
                            					if(operation==="remove"){
                            						formObj.attr("action","/board/remove"); //action변경
-                           					}else if(operation==="list"){
-                           						self.location="/board/list";
-                           						return;
+                           						
+                           					} else if(operation==="list"){
+                           						// 리스트 버튼을 눌렀을때
+                           						formObj.attr("action", "/board/list");
+												formObj.attr("method", "get");
+												
+												// hidden 태그 4개만 전달하기 위해, 백업 -> form태그 empty -> 백업한 태그값 추가
+												var pageNumTag = $("input[name='pageNum']").clone();
+												var amountTag = $("input[name='amount']").clone();
+												var keywordTag = $("input[name='keyword']").clone();
+												var typeTag = $("input[name='type']").clone();
+												
+                           						formObj.empty();
+                           						
+                           						formObj.append(pageNumTag);
+                           						formObj.append(amountTag);
+                           						formObj.append(keywordTag);
+                           						formObj.append(typeTag);
                            					}
                            					formObj.submit();
                            				});
