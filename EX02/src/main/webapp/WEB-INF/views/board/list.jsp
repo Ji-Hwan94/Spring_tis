@@ -54,6 +54,11 @@
                                 		<td width="800">
                                 			<a class="move" href='<c:out value="${board.bno}"/>'>
                                 				<c:out value="${board.title}"/>
+                                				<!-- 
+                                				<b><c:out value="${ board.replyCnt != 0 ? [board.replyCnt] : '' }" /></b>
+                                				 -->
+                                				<span class="badge"><c:out value="${board.replyCnt != 0 ? board.replyCnt : null}" /></span> 
+                                				
                                 			</a>
                                 		</td>
                                 		<td><c:out value="${board.writer}"/></td>

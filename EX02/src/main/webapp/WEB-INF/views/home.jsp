@@ -5,5 +5,7 @@
 	<title>Home</title>
 </head>
 <body>
-	<a href="/board/list">board</a>
+	<a href="/board/list">board</a> <br>
+	<a href="/uploadAjax">uploadAjax</a>
+</body>
 </html>
