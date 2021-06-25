@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://cxf.apache.org/configuration/security http://cxf.apache.org/schemas/configuration/security.xsd">
+
+<bean id="customAccessDenied" class="org.zerock.security.CustomAccessDeniedHandler"></bean>
+<bean id="customLoginSuccess" class="org.zerock.security.CustomLoginSuccessHandler"></bean>
+<bean id="customPasswordEncoder" class="org.zerock.security.CustomNoOpPasswordEncoder"></bean>
+<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></bean>
+
+<security:http>
+	<security:intercept-url pattern="/sample/all" access="permitAll" />
+	
+	<security:intercept-url pattern="/sample/member" access="hasRole('ROLE_MEMBER')" />
+	
+	<security:intercept-url pattern="/sample/admin" access="hasRole('ROLE_ADMIN')" />
+	
+	<!-- <security:form-login />  -->
+	<security:form-login login-page="/customLogin" authentication-success-handler-ref="customLoginSuccess" />
+	
+	<!-- 로그아웃을 사용할 때 사용하는 세션은 customlogout 이다. -->
+	<security:logout logout-url="/customLogout" invalidate-session="true" />
+	
+	<security:access-denied-handler error-page="/accessError" />
+	<security:access-denied-handler ref="customAccessDenied"/>
+</security:http>
+
+<security:authentication-manager>
+	<security:authentication-provider>
+		<!-- 
+		<security:user-service>
+				<security:user name="member" password="{noop}member" authorities="ROLE_MEMBER" />
+				<security:user name="admin" password="{noop}admin" authorities="ROLE_MEMBER, ROLE_ADMIN" />
+		</security:user-service>
+		 -->
+		 <!-- DB를 사용해서 id와 비밀번호를 받는다. -->
+		 <security:jdbc-user-service data-source-ref="dataSource" />
+		 
+		 <security:password-encoder ref="customPasswordEncoder" />
+		 <security:password-encoder ref="bcryptPasswordEncoder" />
+	</security:authentication-provider>
+</security:authentication-manager>
+</beans>
